@@ -2,6 +2,7 @@ package data
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -24,12 +25,23 @@ func (l Line) HasPlayer() bool {
 	return strings.Contains(l.String(), "ClientUserinfoChanged")
 }
 
+func (l Line) HasKill() bool {
+	return strings.Contains(l.String(), "Kill")
+}
+
 func (l Line) ExtractPlayer() string {
 	reg := regexp.MustCompile(`n\\(.*?)\\t`)
 	s := reg.FindString(l.String())
 	// Remove the first and last 2 characters from the string
 	// in order to get the player name
 	return s[2 : len(s)-2]
+}
+
+func (l Line) ExtractAction() (Killer, Victim, Mode) {
+	reg := regexp.MustCompile(`([^:]*?) killed (.*?) by (MOD_.*)`)
+	s := reg.FindStringSubmatch(l.String())
+	killer, killed, mode := Killer(strings.TrimSpace(s[1])), Victim(s[2]), Mode(s[3])
+	return killer, killed, mode
 }
 
 func (l Line) Player() (p.Player, error) {
@@ -61,4 +73,15 @@ func (lines GameLines) Players() p.Players {
 	}
 
 	return players
+}
+
+func (lines GameLines) Kills(players *p.Players) {
+	for _, v := range lines {
+		if v.HasKill() {
+			_, _, _ = v.ExtractAction() // killer, killed, action
+
+			// player := (*players)[killer]
+			// player.AddKill(killed, action)
+		}
+	}
 }

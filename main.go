@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	data "github.com/BuddhiLW/cloud-walk-techtest/data"
 	// g "github.com/BuddhiLW/cloud-walk-techtest/game"
 	// p "github.com/BuddhiLW/cloud-walk-techtest/players"
@@ -18,9 +16,8 @@ func main() {
 	rawDataByGame := rawData.ToGames()
 	lines := rawDataByGame[1].ToLines()
 	var gl data.GameLines = lines
-	// for _, v := range gl {
-	// 	fmt.Println(v)
-	// }
 	players := gl.Players()
-	fmt.Println(players)
+
+	gl.Kills(&players)
+	// Extract the kills for each player
 }
