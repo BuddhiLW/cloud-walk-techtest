@@ -9,7 +9,7 @@ func (g Gist) url() string {
 	return string(g)
 }
 
-func (g Gist) ReadGist() string {
+func (g Gist) ReadGist() RawData {
 	resp, err := http.Get(g.url())
 	if err != nil {
 		panic(err)
@@ -19,5 +19,7 @@ func (g Gist) ReadGist() string {
 	if err != nil {
 		panic(err)
 	}
-	return string(body)
+
+	var rawData RawData = RawData(body)
+	return rawData
 }

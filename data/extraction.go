@@ -12,23 +12,6 @@ func (r RawData) String() string {
 	return string(r)
 }
 
-func (r RawData) SplitByGame() RawGames {
-	var dataBySplit RawGames
-	var gameCount int = 0
-
-	splits := strings.Split(r.String(), "------------------------------------------------------------")
-
-	for _, v := range splits {
-		// has regex =InitGame:= or not -- determine if it's a game
-		if strings.Contains(v, "InitGame:") {
-			gameCount++
-			rawGame := RawGame(v)
-			dataBySplit[gameCount] = rawGame
-		}
-	}
-	return dataBySplit
-}
-
 func (r RawGame) String() string {
 	return string(r)
 }
@@ -43,7 +26,10 @@ func (l Line) HasPlayer() bool {
 
 func (l Line) ExtractPlayer() string {
 	reg := regexp.MustCompile(`n\\(.*?)\\t`)
-	return reg.FindString(l.String())
+	s := reg.FindString(l.String())
+	// Remove the first and last 2 characters from the string
+	// in order to get the player name
+	return s[2 : len(s)-2]
 }
 
 func (l Line) Player() (p.Player, error) {
@@ -61,7 +47,7 @@ func containPlayer(playersMap map[string]p.Player, name string) bool {
 }
 
 func (lines GameLines) Players() p.Players {
-	var players map[string]p.Player
+	var players p.Players = map[string]p.Player{}
 
 	// Extract players from the lines
 	for _, v := range lines {
