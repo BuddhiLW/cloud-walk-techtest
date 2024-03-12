@@ -5,8 +5,6 @@ import (
 	"net/http"
 )
 
-type Gist string
-
 func (g Gist) url() string {
 	return string(g)
 }

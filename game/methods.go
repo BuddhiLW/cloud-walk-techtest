@@ -49,3 +49,25 @@ func (g *Game) AddTotalKills() {
 
 func (g *Game) AddKill(killer string, killed string) {
 }
+
+// Enconding logic
+
+// game := Game{
+//     // initialize the Game type..
+// }
+
+// encodeGame := EncodeGame{
+//     TotalKills: game.TotalKills,
+//     Players:    make([]string, len(game.Players)),
+//     Kills:      game.Kills,
+// }
+
+// for i, player := range game.Players {
+//     encodeGame.Players[i] = player.Name
+// }
+
+// jsonStr, err := json.Marshal(encodeGame)
+// if err != nil {
+//     // handle error
+// }
+// fmt.Println(string(jsonStr))
