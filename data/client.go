@@ -3,6 +3,7 @@ package data
 import (
 	"io"
 	"net/http"
+	"os"
 )
 
 func (g Gist) url() string {
@@ -22,4 +23,19 @@ func (g Gist) ReadGist() RawData {
 
 	var rawData RawData = RawData(body)
 	return rawData
+}
+
+type Path string
+
+func (path Path) String() string {
+	return string(path)
+}
+
+func (path Path) ReadFile() RawData {
+	content, err := os.ReadFile(path.String())
+	if err != nil {
+		panic(err)
+	}
+
+	return RawData(content)
 }

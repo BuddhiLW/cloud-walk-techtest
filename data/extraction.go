@@ -2,7 +2,6 @@ package data
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
 	"strings"
 
@@ -53,13 +52,14 @@ func (l Line) Player() (p.Player, error) {
 	}
 }
 
-func containPlayer(playersMap map[string]p.Player, name string) bool {
-	_, ok := playersMap[name]
+func containPlayer(playersMap *p.Players, name string) bool {
+	_, ok := (*playersMap)[name]
 	return ok
 }
 
-func (lines GameLines) Players() p.Players {
-	var players p.Players = map[string]p.Player{}
+func (lines GameLines) Players() *p.Players {
+	players := p.NewPlayers()
+	// var players p.Players = map[string]p.Player{}
 
 	// Extract players from the lines
 	for _, v := range lines {
@@ -67,7 +67,7 @@ func (lines GameLines) Players() p.Players {
 			playerName := v.ExtractPlayer()
 			if !containPlayer(players, playerName) {
 				player := p.NewPlayer(playerName)
-				players[playerName] = *player
+				players.AddPlayer(player)
 			}
 		}
 	}
@@ -78,10 +78,14 @@ func (lines GameLines) Players() p.Players {
 func (lines GameLines) Kills(players *p.Players) {
 	for _, v := range lines {
 		if v.HasKill() {
-			_, _, _ = v.ExtractAction() // killer, killed, action
-
-			// player := (*players)[killer]
-			// player.AddKill(killed, action)
+			killer, killed, action := v.ExtractAction() // killer, killed, action
+			player := (*players)[killer.String()]
+			player.AddKill(killed.String(), action.String())
 		}
+	}
+
+	// Count total kills, for each player -- AddKill method already does this, in previous for loop
+	for _, p := range *players {
+		p.Kills = p.Victims.CountKills()
 	}
 }

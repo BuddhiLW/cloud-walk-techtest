@@ -3,9 +3,7 @@ package game
 import player "github.com/BuddhiLW/cloud-walk-techtest/players"
 
 type Game struct {
-	// TotalKills int
-	// Kills      map[string]int
-	Players map[string]player.Player
+	Players player.Players
 }
 
 type EncodeGame struct {
