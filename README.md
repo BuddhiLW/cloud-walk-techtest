@@ -25,3 +25,30 @@ Transform log into this structure, per match
 ```
 
 *Print it on console*
+
+## Goal (Script Report)
+
+``` quote
+Create a script that prints a report (grouped information) for each match and a player ranking.
+```
+
+``` sh
+
+./main report 10
+```
+
+``` output
+2024/03/13 14:19:02 JSON data for Match:
+2024/03/13 14:19:02 Match chosen: 10
+{"total_kills":60,"players":["Dono da Bola","Zeh","Chessus","Mal","Assasinu Credi","Isgalamido","Oootsimo"],"kills":{"Assasinu Credi":3,"Chessus":5,"Dono da Bola":3,"Isga
+lamido":6,"Mal":1,"Oootsimo":-1,"Zeh":7}}
+```
+
+
+
+## Goal (Report by Death type)
+
+``` 
+Generate a report of deaths grouped by death cause for each match.
+```
+
