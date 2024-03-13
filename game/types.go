@@ -11,3 +11,5 @@ type EncodeGame struct {
 	Players    []string       `json:"players"`
 	Kills      map[string]int `json:"kills"`
 }
+
+type EncodeGames map[string]*EncodeGame

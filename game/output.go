@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/BuddhiLW/cloud-walk-techtest/data"
 )
@@ -15,7 +16,11 @@ func GameOutput(n ...int) string {
 	rawDataByGame := rawData.ToGames()
 
 	if len(n) == 0 {
-		for _, game := range rawDataByGame {
+		allEncodedGames := NewEncodeGames()
+		log.Println("All games (N): ", len(rawDataByGame)+1)
+		log.Println("---------------------------------\n")
+
+		for i, game := range rawDataByGame {
 			lines := game.ToLines()
 			// Parse and extract data
 			var gl data.GameLines = lines
@@ -24,12 +29,23 @@ func GameOutput(n ...int) string {
 
 			// Encode data in Game format
 			game := NewGame(players)
-			encodebleGame := game.NewEncodeGame()
-			json, _ := json.Marshal(encodebleGame)
+			encodeableGame := game.NewEncodeGame()
 
-			log.Print(string(json))
-			return string(json)
+			// Add the game to the list of games (Encoded format)
+			index := strconv.Itoa(i + 1)
+			index = "game_" + index
+			(*allEncodedGames)[index] = encodeableGame
 		}
+
+		json, _ := json.Marshal(allEncodedGames)
+		printableJSON, _ := PrettyString(string(json))
+		fmt.Println(printableJSON)
+		return string(json)
+	}
+
+	// Check if the game exists in log
+	if n[0]-1 > len(rawDataByGame) {
+		log.Fatalf("Game %d not found; the log only contains up to game-number %d", n[0], len(rawDataByGame)+1)
 	}
 
 	// Process data, for game n
@@ -46,7 +62,9 @@ func GameOutput(n ...int) string {
 	json, _ := json.Marshal(encodebleGame)
 
 	// Print the result of the game
-	fmt.Println(string(json))
+	printableJSON, _ := PrettyString(string(json))
+	fmt.Println(printableJSON)
+
 	return string(json)
 }
 

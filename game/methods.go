@@ -88,3 +88,7 @@ func (g *Game) countKills(name string) int {
 //     // handle error
 // }
 // fmt.Println(string(jsonStr))
+
+func NewEncodeGames() *EncodeGames {
+	return &EncodeGames{}
+}
