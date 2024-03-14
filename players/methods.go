@@ -49,3 +49,12 @@ func (v *Victims) CountKills() int {
 	}
 	return kills
 }
+
+func (ws *Ways) HasMode(mode string) bool {
+	_, ok := (*ws)[mode]
+	return ok
+}
+
+func NewWays() *Ways {
+	return &Ways{}
+}

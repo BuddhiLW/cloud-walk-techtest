@@ -86,7 +86,9 @@ func GameRanking(specification string, n ...int) string {
 	if len(n) == 0 {
 		log.Println("All Games Rank (by kill): ")
 		log.Println("---------------------------------\n")
-		log.Println("TODO")
+		for i, _ := range rawDataByGame {
+			GameRanking(specification, i+1)
+		}
 	}
 
 	// Check if the game exists in log
@@ -134,4 +136,33 @@ func GameRanking(specification string, n ...int) string {
 	}
 
 	return ""
+}
+
+func GameOutputStatistic(n ...int) string {
+	var gist data.Gist = "https://gist.githubusercontent.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8/raw/df6ef4a9c0b326ce3760233ef24ae8bfa8e33940/qgames.log"
+	rawData := gist.ReadGist()
+	rawDataByGame := rawData.ToGames()
+
+	if n[0]-1 > len(rawDataByGame) {
+		log.Fatalf("Game %d not found; the log only contains up to game-number %d", n[0], len(rawDataByGame)+1)
+	}
+
+	// Process data, for game n
+	lines := rawDataByGame[n[0]-1].ToLines()
+
+	// Parse and extract data
+	var gl data.GameLines = lines
+	players := gl.Players()
+	gl.Kills(players)
+
+	// Encode data in Game format
+	game := NewGame(players)
+
+	// encodeableGame := game.NewEncodeGame()
+	typeKills := game.CountTypeKills()
+	json, _ := json.Marshal(typeKills)
+	printableJSON, _ := PrettyString(string(json))
+	fmt.Println(printableJSON)
+
+	return string(json)
 }

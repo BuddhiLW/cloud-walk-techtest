@@ -104,3 +104,21 @@ func (g *EncodeGame) RankPlayersByKills() (*GameRank, []*Rank) {
 
 	return gameRank, scoreList
 }
+
+func (g *Game) CountTypeKills() p.Ways {
+	ways := p.NewWays()
+
+	// Count the kills for each kill-mode, in the game
+	for _, p := range g.Players {
+		for _, way := range p.Victims {
+			for mode, kills := range way {
+				if ways.HasMode(mode) {
+					(*ways)[mode] += kills
+				} else {
+					(*ways)[mode] = kills
+				}
+			}
+		}
+	}
+	return *ways
+}
