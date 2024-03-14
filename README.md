@@ -25,17 +25,24 @@
 - go
 
 ## Tools and Methodologies used
-- [Bonzai](https://github.com/rwxrob/bonzai-example) (for generating the binary-tree)
+- [Bonzai](https://github.com/rwxrob/bonzai) (for generating the binary-tree)
 - Unit Test 
 
 ## How to produce the binaries (Install)
 
+### Local build
 ``` sh
 git clone https://github.com/BuddhiLW/cloud-walk-techtest.git
 bash ./build.sh
 ```
 
 Now you should have the new binary file in the project root called `qrep` (qrep stands for *quake report*).
+
+### Fetch with Go command-line
+
+``` sh
+go install github.com/BuddhiLW/cloud-walk-techtest/cmd/qrep@latest
+```
 
 ## How to use the binaries
 Make sure the permissions are given to read, write and execute,
