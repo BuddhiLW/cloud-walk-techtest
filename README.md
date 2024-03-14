@@ -172,7 +172,7 @@ E.g.,
 
 The compose-command `rank` defaults to a pretty print
 ``` sh
-./main report rank 10
+./qrep report rank 10
 ```
 
 ``` output
@@ -192,7 +192,7 @@ Name: Oootsimo,       Kills: -1, Position: 7
 But, you can also specify a json output format, like so:
 
 ``` sh
-./main report rank json 10
+./qrep report rank json 10
 ```
 
 ``` output
