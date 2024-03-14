@@ -250,8 +250,32 @@ But, you can also specify a json output format, like so:
 
 ## Goal (Report by Death type)
 
-``` 
+``` quote
 Generate a report of deaths grouped by death cause for each match.
 ```
+
+### Report by death-type by match (Implementation)
+
+To get json-formatted statistics, by grouping kills by kill-type in a given match, we can use `qrep data stats`, `qrep data statistics` or `qrep data bydeath`.
+
+E.g.,
+``` sh
+./qrep data stats 4
+```
+
+``` output
+2024/03/13 21:36:53 Stats of match << 4 >> (by death type)
+{
+    "MOD_FALLING": 11,
+    "MOD_MACHINEGUN": 4,
+    "MOD_RAILGUN": 8,
+    "MOD_ROCKET": 20,
+    "MOD_ROCKET_SPLASH": 51,
+    "MOD_SHOTGUN": 2,
+    "MOD_TRIGGER_HURT": 9
+
+```
+
+
 
 
