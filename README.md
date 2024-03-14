@@ -239,7 +239,7 @@ Name: Mal,            Kills: 1,  Position: 6
 Name: Oootsimo,       Kills: -1, Position: 7
 ```
 
-But, you can also specify a json output format, like so:
+But, you can also specify a json output format, like so (unordered):
 
 ``` sh
 ./qrep data rank json 10
@@ -251,23 +251,38 @@ But, you can also specify a json output format, like so:
 {
     "Assasinu Credi": {
         "name": "Assasinu Credi",
-        "kills": 1,
+        "kills": 3,
+        "position": 4
+    },
+    "Chessus": {
+        "name": "Chessus",
+        "kills": 5,
         "position": 3
     },
     "Dono da Bola": {
         "name": "Dono da Bola",
-        "kills": 0,
-        "position": 4
+        "kills": 3,
+        "position": 5
     },
     "Isgalamido": {
         "name": "Isgalamido",
-        "kills": 2,
-        "position": 1
+        "kills": 6,
+        "position": 2
+    },
+    "Mal": {
+        "name": "Mal",
+        "kills": 1,
+        "position": 6
+    },
+    "Oootsimo": {
+        "name": "Oootsimo",
+        "kills": -1,
+        "position": 7
     },
     "Zeh": {
         "name": "Zeh",
-        "kills": 1,
-        "position": 2
+        "kills": 7,
+        "position": 1
     }
 }
 ```
