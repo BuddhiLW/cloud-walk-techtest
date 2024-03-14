@@ -53,7 +53,12 @@ complete -C qrep qrep
 
 You will be able to type `qrep <TAB>` and get completions.
 
-https://github.com/BuddhiLW/cloud-walk-techtest/assets/59554283/c2d90eec-ace3-4719-8904-c72b5b35a9a0
+
+
+https://github.com/BuddhiLW/cloud-walk-techtest/assets/59554283/4aba964c-2869-4a01-96df-0782b44e56a3
+
+
+
 
 ## How to use the binaries
 Make sure the permissions are given to read, write and execute,
