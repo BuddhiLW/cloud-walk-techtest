@@ -41,15 +41,17 @@ Now you should have the new binary file in the project root called `qrep` (qrep 
 ### Fetch with Go command-line
 
 ``` sh
-go install github.com/BuddhiLW/cloud-walk-techtest/cmd/qrep@latest
+go install github.com/BuddhiLW/cloud-walk-techtest/cmd/qrep@1.0.1.1 // stable release
+// latest: go install github.com/BuddhiLW/cloud-walk-techtest/cmd/qrep@latest
 ```
 
-For autocompletion magic, insert this line, in your `~/.bashrc`:
+For autocompletion magic, insert this line (any place), in your `~/.bashrc` and restart the shell:
 
 ``` sh
 complete -C qrep qrep
 ```
 
+You will be able to type `qrep <TAB>` and get completions.
 
 ## How to use the binaries
 Make sure the permissions are given to read, write and execute,
