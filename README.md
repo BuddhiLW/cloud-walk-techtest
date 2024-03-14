@@ -95,19 +95,20 @@ To illustrate the case of `qrep data help` for getting to know more about the co
 
 ``` man
 NAME
-       qrep - qrep is a quake-report binary. It's goal is to output JSON data for the chosen match, arg should be a <number: integer>
+       report - data, or report, is the root of the quake-report binary-tree.
 
 ALIASES
-       qrep (data|json)
+       report (data)
 
 SYNOPSIS
-       qrep qrep <number>
+       report <number>
 
 COMMANDS
-       help             - display help similar to man page format
-       r|rank
-       stats|statistics
+       help                     - display help similar to man page format
+       r|rank                   - display **ranking** for a given **match**
+       stats|bydeath|statistics - display statistics of a **match** by **death type**
 ```
+
 
 ### To get all matches data (Implementation)
 

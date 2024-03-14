@@ -14,6 +14,7 @@ var RankCmd = &Z.Cmd{
 	Commands: []*Z.Cmd{help.Cmd, JsonRankCmd, PrettyRankCmd},
 	Aliases:  []string{`r`},
 	Usage:    `<n: number>, or try: <rank help>`,
+	Summary:  `display **ranking** for a given **match**`,
 	Call: func(x *Z.Cmd, args ...string) error {
 		if len(args) == 0 {
 			return x.UsageError()

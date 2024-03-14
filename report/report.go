@@ -10,10 +10,10 @@ import (
 )
 
 var ReportCmd = &Z.Cmd{
-	Name:     `qrep`,
-	Aliases:  []string{`data`, `json`},
-	Usage:    `qrep <number>`,
-	Summary:  `*qrep* is a quake-report binary.`,
+	Name:     `report`,
+	Aliases:  []string{`data`},
+	Usage:    `<number>`,
+	Summary:  `*data*, or *report*, is the root of the quake-report binary-tree.`,
 	NumArgs:  0,
 	Commands: []*Z.Cmd{help.Cmd, RankCmd, StatisticsCmd},
 	Call: func(_ *Z.Cmd, args ...string) error {
@@ -45,6 +45,7 @@ var StatisticsCmd = &Z.Cmd{
 	Name:     `statistics`,
 	Commands: []*Z.Cmd{help.Cmd},
 	Aliases:  []string{`stats`, `bydeath`},
+	Summary:  `display statistics of a **match** by **death type**`,
 	Call: func(x *Z.Cmd, args ...string) error {
 		if len(args) == 0 {
 			return x.UsageError()
