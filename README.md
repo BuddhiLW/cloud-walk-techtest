@@ -7,6 +7,8 @@
     - [How to produce the binaries (Install)](#how-to-produce-the-binaries-install)
     - [How to use the binaries](#how-to-use-the-binaries)
         - [To get an explanation of *any* command (`man` page format)](#to-get-an-explanation-of-any-command-man-page-format)
+            - [Man page help](#man-page-help)
+            - [Another example](#another-example)
         - [To get all matches data (Implementation)](#to-get-all-matches-data-implementation)
         - [Report only the <nth> match data (Implementation)](#report-only-the-nth-match-data-implementation)
         - [Report by death-type, the <nth> match (Implementation)](#report-by-death-type-the-nth-match-implementation)
@@ -40,6 +42,53 @@ chmod +rwx ./qrep
 Then, use `qrep` as follows,
 
 ### To get an explanation of *any* command (`man` page format)
+
+#### Man page help
+``` sh
+./qrep help
+```
+
+``` man
+NAME
+       qrep - Quake Report: A Bonzai composite command tree, for generating Reports for Cloud Walk technical test
+
+SYNOPSIS
+       qrep COMMAND
+
+COMMANDS
+       help           - display help similar to man page format
+       conf           - manage conf in /home/galois/.config/qrep/config.yaml
+       var            - cache variables in /home/galois/.cache/qrep/vars
+       data|json|qrep - *qrep* is a quake-report binary.
+
+DESCRIPTION
+       Quake Report is a Bonzai composite command tree, for generating Reports for Cloud Walk technical test.
+
+       It is a simple CLI application that generates a report for the given earthquake data.
+
+       You can use the following commands to generate the report:
+
+       * qrep command help      (documentation for the command)
+       * qrep data
+       * qrep data n            (where n is the match you want json-formatted data about)
+       * qrep data rank n       (where n is the given match-ranking)
+       * qrep data stats n      (where n is the given match-stats -- kills by type)
+
+       See the README.md for more information and examples, or use *_command-tree_ help* to see another man-page about the specific command-tree.
+
+CONTACT
+       Site:   buddhilw.com
+       Source: git@github.com:BuddhiLW/cloud-walk-techtest.git
+       Issues: github.com/BuddhiLW/cloud-walk-techtest/issues
+
+LEGAL
+       qrep (v1.0.1) Copyright 2024 Pedro G. Branquinho
+       License Apache-2.0
+```
+
+#### Another example
+To illustrate the case of `qrep data help` for getting to know more about the command
+
 ``` sh
 ./qrep data help
 ```
@@ -172,7 +221,7 @@ E.g.,
 
 The compose-command `rank` defaults to a pretty print
 ``` sh
-./qrep report rank 10
+./qrep data rank 10
 ```
 
 ``` output
@@ -192,7 +241,7 @@ Name: Oootsimo,       Kills: -1, Position: 7
 But, you can also specify a json output format, like so:
 
 ``` sh
-./qrep report rank json 10
+./qrep data rank json 10
 ```
 
 ``` json 

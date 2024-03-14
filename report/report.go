@@ -13,7 +13,7 @@ var ReportCmd = &Z.Cmd{
 	Name:     `qrep`,
 	Aliases:  []string{`data`, `json`},
 	Usage:    `qrep <number>`,
-	Summary:  `*qrep* is a quake-report binary. It's goal is to output structured-JSON data reports for the chosen match, arg should be a <number: integer>; defaults to all matches.`,
+	Summary:  `*qrep* is a quake-report binary.`,
 	NumArgs:  0,
 	Commands: []*Z.Cmd{help.Cmd, RankCmd, StatisticsCmd},
 	Call: func(_ *Z.Cmd, args ...string) error {

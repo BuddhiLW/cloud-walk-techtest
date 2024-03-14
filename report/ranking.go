@@ -57,7 +57,7 @@ var PrettyRankCmd = &Z.Cmd{
 	Commands: []*Z.Cmd{help.Cmd},
 	Aliases:  []string{`pp`, `p`, `text`},
 	Summary:  `display pretty print of the ranking (default)`,
-	// Usage:    `<n: number>, or try: <rank help>`,
+	Usage:    `<n: number>, or try: <rank help>`,
 	Call: func(x *Z.Cmd, args ...string) error {
 		if len(args) == 0 {
 			return x.UsageError()
