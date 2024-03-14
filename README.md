@@ -4,6 +4,7 @@
 
 - [Cloud Walk Technical Test](#cloud-walk-technical-test)
     - [Requirements ](#requirements)
+    - [Tools and Methodologies used](#tools-and-methodologies-used)
     - [How to produce the binaries (Install)](#how-to-produce-the-binaries-install)
     - [How to use the binaries](#how-to-use-the-binaries)
         - [To get an explanation of *any* command (`man` page format)](#to-get-an-explanation-of-any-command-man-page-format)
@@ -22,6 +23,10 @@
 <!-- markdown-toc end -->
 ## Requirements 
 - go
+
+## Tools and Methodologies used
+- [Bonzai](https://github.com/rwxrob/bonzai-example) (for generating the binary-tree)
+- Unit Test 
 
 ## How to produce the binaries (Install)
 
