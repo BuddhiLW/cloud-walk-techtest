@@ -44,7 +44,7 @@ Then, use `qrep` as follows,
 ./qrep data help
 ```
 
-``` output
+``` man
 NAME
        qrep - qrep is a quake-report binary. It's goal is to output JSON data for the chosen match, arg should be a <number: integer>
 
@@ -69,7 +69,7 @@ Call `qrep data` without arguments:
 
 The expected output looks like this:
 
- ```  output
+ ``` json
 All games (N):  22
 ---------------------------------
 
@@ -116,7 +116,7 @@ The expected output looks like this:
 ./qrep data 10
 ```
 
-``` output
+``` json
 2024/03/13 19:35:04 JSON data for Match:
 2024/03/13 19:35:04 Match chosen: 10
 {
@@ -152,7 +152,7 @@ E.g.,
 ./qrep data stats 4
 ```
 
-``` output
+``` json
 2024/03/13 21:36:53 Stats of match << 4 >> (by death type)
 {
     "MOD_FALLING": 11,
@@ -195,7 +195,7 @@ But, you can also specify a json output format, like so:
 ./qrep report rank json 10
 ```
 
-``` output
+``` json 
 2024/03/13 21:07:48 In json:
 
 {
