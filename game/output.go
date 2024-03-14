@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
+	"text/tabwriter"
 
 	"github.com/BuddhiLW/cloud-walk-techtest/data"
 )
@@ -74,4 +76,62 @@ func PrettyString(str string) (string, error) {
 		return "", err
 	}
 	return prettyJSON.String(), nil
+}
+
+func GameRanking(specification string, n ...int) string {
+	var gist data.Gist = "https://gist.githubusercontent.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8/raw/df6ef4a9c0b326ce3760233ef24ae8bfa8e33940/qgames.log"
+	rawData := gist.ReadGist()
+	rawDataByGame := rawData.ToGames()
+
+	if len(n) == 0 {
+		log.Println("All Games Rank (by kill): ")
+		log.Println("---------------------------------\n")
+		log.Println("TODO")
+	}
+
+	// Check if the game exists in log
+	if n[0]-1 > len(rawDataByGame) {
+		log.Fatalf("Game %d not found; the log only contains up to game-number %d", n[0], len(rawDataByGame)+1)
+	}
+
+	// Process data, for game n
+	lines := rawDataByGame[n[0]-1].ToLines()
+
+	// Parse and extract data
+	var gl data.GameLines = lines
+	players := gl.Players()
+	gl.Kills(players)
+
+	// Encode data in Game format
+	game := NewGame(players)
+	encodeableGame := game.NewEncodeGame()
+	encodeableGameRank, orderedListGameRanked := encodeableGame.RankPlayersByKills()
+	jsonRank, _ := json.Marshal(encodeableGameRank)
+
+	switch specification {
+	case "json":
+		printableJSON, _ := PrettyString(string(jsonRank))
+		log.Println("In json:\n")
+		fmt.Println(printableJSON, "\n")
+
+		return string(jsonRank)
+	case "text":
+		log.Println("In text:\n")
+		// Create a new tabwriter.Writer instance -- formatting purposes
+		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
+
+		for _, v := range orderedListGameRanked {
+			name := v.Name
+			kills := v.Kills
+			position := v.Position
+			fmt.Fprintf(w, "Name: %s,\tKills: %d,\tPosition: %d\n", name, kills, position)
+		}
+
+		// Flush the Writer to ensure all data is written to the output.
+		w.Flush()
+
+		return ""
+	}
+
+	return ""
 }

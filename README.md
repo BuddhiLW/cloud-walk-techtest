@@ -22,7 +22,7 @@ Make sure the permissions are given to read, write and execute,
 chmod +rwx ./qrep
 ```
 
-Then, use qrep as follows,
+Then, use `qrep` as follows,
 
 #### To get an explanation of the command (help like a `man`ual page)
 ``` sh
@@ -127,7 +127,9 @@ The expected output looks like this:
 }
 ```
 
-## Introduction
+
+---------------
+# Introduction to the **test** specification
 
 The test consists in parsing a log file and outputting a json as a respose.
 
@@ -137,7 +139,7 @@ Log to be parsed: https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b
 
 ## Goal (Parse)
 
-Transform log into this structure, per match
+Transform log into this structure, per game-match
 
 ``` json
 "game_1": {
@@ -160,7 +162,6 @@ Create a script that prints a report (grouped information) for each match and a 
 ```
 
 ``` sh
-
 ./main report 10
 ```
 
@@ -170,8 +171,6 @@ Create a script that prints a report (grouped information) for each match and a 
 {"total_kills":60,"players":["Dono da Bola","Zeh","Chessus","Mal","Assasinu Credi","Isgalamido","Oootsimo"],"kills":{"Assasinu Credi":3,"Chessus":5,"Dono da Bola":3,"Isga
 lamido":6,"Mal":1,"Oootsimo":-1,"Zeh":7}}
 ```
-
-
 
 ## Goal (Report by Death type)
 

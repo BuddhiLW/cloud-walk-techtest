@@ -1,6 +1,8 @@
 package game
 
 import (
+	"sort"
+
 	p "github.com/BuddhiLW/cloud-walk-techtest/players"
 )
 
@@ -16,7 +18,7 @@ func NewGame(ps *p.Players) *Game {
 
 func (g *Game) NewEncodeGame() *EncodeGame {
 	totalKills := 0
-	killMap := make(map[string]int)
+	killMap := Kills{}
 	playerNames := make([]string, 0, len(g.Players)-1)
 
 	for name, p := range g.Players {
@@ -57,38 +59,48 @@ func (g *Game) AddPlayer(p *p.Player) {
 	g.Players[p.Name] = p
 }
 
-func (g *Game) countKills(name string) int {
+func (g *Game) countKills(name string) Kill {
 	// Get the kills from the player
 	kills := g.Players[name].Kills
 
 	// Remove the kills from the world
 	killWorld := g.Players["<world>"].Victims[name].CountKills()
 
-	return kills - killWorld
+	// Calculate the kills
+
+	return Kill(kills - killWorld)
 }
-
-// Enconding logic
-
-// game := Game{
-//     // initialize the Game type..
-// }
-
-// encodeGame := EncodeGame{
-//     TotalKills: game.TotalKills,
-//     Players:    make([]string, len(game.Players)),
-//     Kills:      game.Kills,
-// }
-
-// for i, player := range game.Players {
-//     encodeGame.Players[i] = player.Name
-// }
-
-// jsonStr, err := json.Marshal(encodeGame)
-// if err != nil {
-//     // handle error
-// }
-// fmt.Println(string(jsonStr))
 
 func NewEncodeGames() *EncodeGames {
 	return &EncodeGames{}
+}
+
+func NewRank() *Rank {
+	return &Rank{}
+}
+
+func NewGameRank() *GameRank {
+	return &GameRank{}
+}
+
+func (g *EncodeGame) RankPlayersByKills() (*GameRank, []*Rank) {
+	gameRank := NewGameRank()
+	scoreList := make([]*Rank, 0, len(g.Kills))
+
+	for playerName, kill := range g.Kills {
+		rank := NewRank()
+		*rank = Rank{Name: Name(playerName), Kills: int(kill)}
+		scoreList = append(scoreList, rank)
+	}
+
+	sort.Slice(scoreList, func(i, j int) bool {
+		return scoreList[i].Kills > scoreList[j].Kills // Descending order
+	})
+
+	for i, rank := range scoreList {
+		rank.Position = i + 1
+		(*gameRank)[rank.Name] = rank
+	}
+
+	return gameRank, scoreList
 }
