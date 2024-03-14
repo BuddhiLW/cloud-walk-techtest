@@ -211,7 +211,7 @@ E.g.,
     "MOD_ROCKET_SPLASH": 51,
     "MOD_SHOTGUN": 2,
     "MOD_TRIGGER_HURT": 9
-
+}
 ```
 
 
