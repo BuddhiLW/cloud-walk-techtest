@@ -44,6 +44,13 @@ Now you should have the new binary file in the project root called `qrep` (qrep 
 go install github.com/BuddhiLW/cloud-walk-techtest/cmd/qrep@latest
 ```
 
+For autocompletion magic, insert this line, in your `~/.bashrc`:
+
+``` sh
+complete -C qrep qrep
+```
+
+
 ## How to use the binaries
 Make sure the permissions are given to read, write and execute,
 
